@@ -1,8 +1,17 @@
 package kz.bitlab.G115rest.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import kz.bitlab.G115rest.model.Item;
 import kz.bitlab.G115rest.service.ItemService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +31,10 @@ public class ItemController {
 
   @GetMapping
   public List<Item> getItems() {
-    return itemService.getItems();
+    return itemService.getItems()
+        .stream()
+        .sorted(Comparator.comparing(Item::getId).reversed())
+        .toList();
   }
 
   @PostMapping

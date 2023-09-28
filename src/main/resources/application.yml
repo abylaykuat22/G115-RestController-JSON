@@ -3,6 +3,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/G115-rest-db
     username: postgres
     password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
+  flyway:
+    url: jdbc:postgresql://localhost:5432/G115-rest-db
+    user: postgres
+    password: postgres
+    locations: classpath:db/changelog

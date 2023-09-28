@@ -28,6 +28,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation group: 'org.flywaydb', name: 'flyway-core', version: '9.22.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

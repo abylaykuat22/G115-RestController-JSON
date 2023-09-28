@@ -9,5 +9,4 @@ public class G115RestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(G115RestApplication.class, args);
 	}
-
 }

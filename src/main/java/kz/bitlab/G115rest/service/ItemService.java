@@ -1,5 +1,8 @@
 package kz.bitlab.G115rest.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import kz.bitlab.G115rest.model.Item;
 import kz.bitlab.G115rest.repository.ItemRepository;
@@ -16,7 +19,12 @@ public class ItemService {
   }
 
   public Item addItem(Item item) {
+    setAnotherCaption("COUNTRY KAZAKHSTAN", "123", "asdasd", "123213", "zxc");
     return itemRepository.save(item);
+  }
+
+  public void setAnotherCaption(String... text) {
+    System.out.println(Arrays.toString(text));
   }
 
   public Item editItem(Item item) {

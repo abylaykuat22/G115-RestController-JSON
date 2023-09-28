@@ -11,7 +11,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
   @Query("select i from Item i where "
       + "i.name ilike concat('%', :search, '%') "
-      + "or i.description ilike concat('%', :search, '%') "
+      + "or i.caption ilike concat('%', :search, '%') "
       + "or cast(i.price as string) = :search")
   List<Item> findFilteredItems(String search);
 }
