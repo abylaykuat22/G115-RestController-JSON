@@ -1,21 +1,26 @@
 package kz.bitlab.G115rest.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import kz.bitlab.G115rest.exceptions.ItemNotFoundException;
+import kz.bitlab.G115rest.exceptions.ItemValueException;
 import kz.bitlab.G115rest.model.Item;
 import kz.bitlab.G115rest.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ItemService {
   private final ItemRepository itemRepository;
 
   public List<Item> getItems() {
-    return itemRepository.findAll();
+    log.info("ЭТО СЕРВИС ДЛЯ ОБЪЕКТА АЙТЕМ");
+    return itemRepository.findAll().stream()
+        .filter(item -> item.getCaption() != null && !item.getCaption().isBlank())
+        .toList();
   }
 
   public Item addItem(Item item) {
@@ -36,7 +41,8 @@ public class ItemService {
   }
 
   public Item getItemById(Long id) {
-    return itemRepository.findById(id).orElseThrow();
+    return itemRepository.findById(id)
+        .orElseThrow(() -> new ItemNotFoundException("ITEM NOT FOUND"));
   }
 
   public List<Item> getFilteredItems(String search) {

@@ -1,5 +1,6 @@
 package kz.bitlab.G115rest;
 
+import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
