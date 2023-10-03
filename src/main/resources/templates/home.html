@@ -52,6 +52,14 @@
   </div>
 </nav>
 <div class="col-6">
+  <form id="addPictureForm" action="/addPicture" method="post" enctype="multipart/form-data" style="display: none">
+    <input type="file" name="picture">
+    <input id="item_id" type="text" name="id">
+    <button>ADD</button>
+  </form>
+
+  <img th:if="${item != null && item.picture != null}" th:src="${'/getPicture/'+ item.picture}">
+
   <input id="idField" type="hidden">
   <input id="nameField" type="text" class="form-control mt-1" placeholder="Insert name...">
   <input id="priceField" type="number" class="form-control mt-1" placeholder="Insert price...">
@@ -84,6 +92,7 @@
     req.onload = function () {
       let items = JSON.parse(req.responseText)
       for (let i = 0; i < items.length; i++) {
+        result += "<a href='/details/"+items[i].id+"'>ПОКАЗАТЬ ФОТО</a>"
         result += "<tr " +
             "onmouseover='showPrice(" + items[i].id + ")' " +
             "onmouseleave='hidePrice(" + items[i].id + ")'" +
@@ -128,6 +137,7 @@
   function itemDetails(id) {
     document.getElementById('editBtn').style = 'display:inline-block'
     document.getElementById('removeBtn').style = 'display:inline-block'
+    document.getElementById('addPictureForm').style = 'display:inline-block'
     let req = new XMLHttpRequest();
     req.open('GET', 'http://localhost:8080/items/' + id)
     req.send()
@@ -137,6 +147,7 @@
       document.getElementById('priceField').value = item.price
       document.getElementById('captionField').value = item.caption
       document.getElementById('idField').value = item.id
+      document.getElementById('item_id').value = item.id
     }
   }
 
@@ -184,6 +195,7 @@
     req.onload = function () {
       let items = JSON.parse(req.responseText)
       for (let i = 0; i < items.length; i++) {
+        result += "<a href='/details/"+items[i].id+"'>ПОКАЗАТЬ ФОТО</a>"
         result += "<tr " +
             "onmouseover='showPrice(" + items[i].id + ")' " +
             "onmouseleave='hidePrice(" + items[i].id + ")'" +

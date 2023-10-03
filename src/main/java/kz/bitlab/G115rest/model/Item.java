@@ -36,4 +36,7 @@ public class Item {
 
   @Column(name = "CAPTION", columnDefinition = "TEXT")
   private String caption;
+
+  @Column(name = "PICTURE", columnDefinition = "TEXT")
+  private String picture;
 }
